@@ -89,7 +89,7 @@ Ensure you have the following before you start:
 The Ultralytics YOLO iOS App is designed to be intuitive:
 
 - **Real-Time Detection:** Launch the app and aim your camera at objects to detect them instantly.
-- **Multiple AI Models:** Select from a range of Ultralytics YOLOv8 models, from YOLOv8n 'nano' to YOLOv8x 'x-large'.
+- **Multiple AI Models:** Select from a range of Ultralytics YOLOv8 models, from wasteV3 'nano' to wasteV3 'x-large'.
 
 ## 💡 Contribute
 

@@ -17,7 +17,7 @@ import CoreMedia
 import UIKit
 import Vision
 
-var mlModel = try! yolov8m(configuration: .init()).model
+var mlModel = try! wasteV3(configuration: .init()).model
 
 class ViewController: UIViewController {
   @IBOutlet var videoPreview: UIView!
@@ -75,6 +75,15 @@ class ViewController: UIViewController {
 
   override func viewDidLoad() {
     super.viewDidLoad()
+
+    // Add Leaderboard Button
+    let leaderboardButton = UIButton(type: .system)
+    leaderboardButton.frame = CGRect(x: 20, y: 40, width: 150, height: 50)
+    leaderboardButton.setTitle("Show Leaderboard", for: .normal)
+    leaderboardButton.addTarget(self, action: #selector(showLeaderboard), for: .touchUpInside)
+          
+    self.view.addSubview(leaderboardButton)
+      
     slider.value = 30
     setLabels()
     setUpBoundingBoxViews()
@@ -82,6 +91,18 @@ class ViewController: UIViewController {
     startVideo()
     // setModel()
   }
+    
+  @objc func showLeaderboard() {
+    // Load the new storyboard by its name (Leaderboard.storyboard)
+    let storyboard = UIStoryboard(name: "Leaderboard", bundle: nil)
+        
+    // Instantiate the LeaderboardViewController using its Storyboard ID
+    if let leaderboardVC = storyboard.instantiateViewController(withIdentifier: "LeaderboardVC") as? LeaderboardViewController {
+        // Present the LeaderboardViewController
+        self.present(leaderboardVC, animated: true, completion: nil)
+    }
+  }
+
 
   override func viewWillTransition(
     to size: CGSize, with coordinator: any UIViewControllerTransitionCoordinator
@@ -140,20 +161,20 @@ class ViewController: UIViewController {
     /// Switch model
     switch segmentedControl.selectedSegmentIndex {
     case 0:
-      self.labelName.text = "YOLOv8n"
-      mlModel = try! yolov8n(configuration: .init()).model
+      self.labelName.text = "wasteV3"
+      mlModel = try! wasteV3(configuration: .init()).model
     case 1:
-      self.labelName.text = "YOLOv8s"
-      mlModel = try! yolov8s(configuration: .init()).model
+      self.labelName.text = "wasteV3"
+      mlModel = try! wasteV3(configuration: .init()).model
     case 2:
-      self.labelName.text = "YOLOv8m"
-      mlModel = try! yolov8m(configuration: .init()).model
+      self.labelName.text = "wasteV3"
+      mlModel = try! wasteV3(configuration: .init()).model
     case 3:
-      self.labelName.text = "YOLOv8l"
-      mlModel = try! yolov8l(configuration: .init()).model
+      self.labelName.text = "wasteV3"
+      mlModel = try! wasteV3(configuration: .init()).model
     case 4:
-      self.labelName.text = "YOLOv8x"
-      mlModel = try! yolov8x(configuration: .init()).model
+      self.labelName.text = "wasteV3"
+      mlModel = try! wasteV3(configuration: .init()).model
     default:
       break
     }
@@ -222,7 +243,7 @@ class ViewController: UIViewController {
   }
 
   func setLabels() {
-    self.labelName.text = "YOLOv8m"
+    self.labelName.text = "wasteV3"
     self.labelVersion.text = "Version " + UserDefaults.standard.string(forKey: "app_version")!
   }
 
