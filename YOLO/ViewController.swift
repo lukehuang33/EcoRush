@@ -16,10 +16,11 @@ import CoreML
 import CoreMedia
 import UIKit
 import Vision
+import Photos
 
-var mlModel = try! wasteV4(configuration: .init()).model
+var mlModel = try! wasteV5(configuration: .init()).model
 
-class ViewController: UIViewController {
+class ViewController: UIViewController, VideoCaptureDelegate, AVCaptureVideoDataOutputSampleBufferDelegate {
   @IBOutlet var videoPreview: UIView!
   @IBOutlet var View0: UIView!
   @IBOutlet var segmentedControl: UISegmentedControl!
@@ -55,6 +56,8 @@ class ViewController: UIViewController {
   var t3 = CACurrentMediaTime()  // FPS start
   var t4 = 0.0  // FPS dt smoothed
   // var cameraOutput: AVCapturePhotoOutput!
+  var photoOutput = AVCapturePhotoOutput()
+
 
   // Developer mode
   let developerMode = UserDefaults.standard.bool(forKey: "developer_mode")  // developer mode selected in settings
@@ -73,7 +76,23 @@ class ViewController: UIViewController {
     return request
   }()
 
+
+    @IBAction func captureButtonTapped(_ sender: UIButton) {
+        // Ensure the photoOutput is ready for capturing
+        guard let connection = photoOutput.connection(with: .video), connection.isActive else {
+            print("Photo output connection is not active.")
+            return
+        }
+        
+        let settings = AVCapturePhotoSettings()
+        settings.flashMode = .auto
+
+        // Capture the photo
+        photoOutput.capturePhoto(with: settings, delegate: self)
+    }
+    
   override func viewDidLoad() {
+        
     super.viewDidLoad()
 
     // Add Leaderboard Button
@@ -83,6 +102,13 @@ class ViewController: UIViewController {
     leaderboardButton.addTarget(self, action: #selector(showLeaderboard), for: .touchUpInside)
           
     self.view.addSubview(leaderboardButton)
+      
+    // Add Challenge Button
+    let challengeButton = UIButton(type: .system)
+    challengeButton.frame = CGRect(x: 225, y: 40, width: 200, height: 50)
+    challengeButton.setTitle("View Challenges", for: .normal)
+    challengeButton.addTarget(self, action: #selector(showChallenges), for: .touchUpInside)
+    self.view.addSubview(challengeButton)
       
     slider.value = 30
     setLabels()
@@ -103,6 +129,21 @@ class ViewController: UIViewController {
     }
   }
 
+  @objc func showChallenges() {
+    // Load the ChallengesViewController from Storyboard
+    let storyboard = UIStoryboard(name: "Challenges", bundle: nil)
+    
+    if let challengesVC = storyboard.instantiateViewController(withIdentifier: "ChallengesVC") as? ChallengesViewController {
+        // Present the ChallengesViewController
+        self.present(challengesVC, animated: true, completion: nil)
+    }
+  }
+    
+  override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+      if segue.identifier == "showCameraView" {
+        // Optionally pass data if needed, otherwise no need to implement anything here.
+    }
+  }
 
   override func viewWillTransition(
     to size: CGSize, with coordinator: any UIViewControllerTransitionCoordinator
@@ -161,8 +202,8 @@ class ViewController: UIViewController {
     /// Switch model
     switch segmentedControl.selectedSegmentIndex {
     case 0:
-      self.labelName.text = "wasteV4"
-      mlModel = try! wasteV4(configuration: .init()).model
+      self.labelName.text = "wasteV5"
+      mlModel = try! wasteV5(configuration: .init()).model
     default:
       break
     }
@@ -231,7 +272,7 @@ class ViewController: UIViewController {
   }
 
   func setLabels() {
-    self.labelName.text = "wasteV4"
+    self.labelName.text = "wasteV5"
   }
 
   @IBAction func playButton(_ sender: Any) {
@@ -311,29 +352,81 @@ class ViewController: UIViewController {
     }
   }
 
-  func startVideo() {
-    videoCapture = VideoCapture()
-    videoCapture.delegate = self
+    func startVideo() {
+        videoCapture = VideoCapture()
+        videoCapture.delegate = self
 
-    videoCapture.setUp(sessionPreset: .photo) { success in
-      // .hd4K3840x2160 or .photo (4032x3024)  Warning: 4k may not work on all devices i.e. 2019 iPod
-      if success {
-        // Add the video preview into the UI.
-        if let previewLayer = self.videoCapture.previewLayer {
-          self.videoPreview.layer.addSublayer(previewLayer)
-          self.videoCapture.previewLayer?.frame = self.videoPreview.bounds  // resize preview layer
+        // Set up the video capture session
+        videoCapture.setUp(sessionPreset: .photo) { success in
+            if success {
+                // Initialize the capture session
+                self.session = AVCaptureSession()
+                self.session.sessionPreset = .photo // Set the appropriate preset
+
+                // Set up the camera device
+                guard let camera = AVCaptureDevice.default(for: .video),
+                      let input = try? AVCaptureDeviceInput(device: camera) else {
+                    print("Failed to get the camera device")
+                    return
+                }
+
+                // Add the input to the session
+                if self.session.canAddInput(input) {
+                    self.session.addInput(input)
+                } else {
+                    print("Failed to add camera input to session")
+                    return
+                }
+
+                // Set up the video data output (for real-time object detection)
+                let videoOutput = AVCaptureVideoDataOutput()
+                videoOutput.setSampleBufferDelegate(self, queue: DispatchQueue(label: "videoQueue"))
+                if self.session.canAddOutput(videoOutput) {
+                    self.session.addOutput(videoOutput)
+                } else {
+                    print("Failed to add video output to session")
+                    return
+                }
+
+                // Set up the photo output (for photo capture)
+                self.photoOutput = AVCapturePhotoOutput()
+                if self.session.canAddOutput(self.photoOutput) {
+                    self.session.addOutput(self.photoOutput)
+                } else {
+                    print("Failed to add photo output to session")
+                    return
+                }
+
+                // Ensure there is an active video connection
+                guard let connection = self.photoOutput.connection(with: .video), connection.isActive, connection.isEnabled else {
+                    print("No active or enabled video connection")
+                    return
+                }
+
+                // Add the video preview into the UI.
+                if let previewLayer = self.videoCapture.previewLayer {
+                    self.videoPreview.layer.addSublayer(previewLayer)
+                    self.videoCapture.previewLayer?.frame = self.videoPreview.bounds  // resize preview layer
+                }
+
+                // Add the bounding box layers to the UI, on top of the video preview.
+                for box in self.boundingBoxViews {
+                    box.addToLayer(self.videoPreview.layer)
+                }
+
+                // Start the session
+                self.session.startRunning()
+                self.videoCapture.start()
+            } else {
+                print("Failed to set up video capture session")
+            }
         }
-
-        // Add the bounding box layers to the UI, on top of the video preview.
-        for box in self.boundingBoxViews {
-          box.addToLayer(self.videoPreview.layer)
-        }
-
-        // Once everything is set up, we can start capturing live video.
-        self.videoCapture.start()
-      }
     }
-  }
+    
+    func captureOutput(_ output: AVCaptureOutput, didOutput sampleBuffer: CMSampleBuffer, from connection: AVCaptureConnection) {
+        // Call your object detection logic
+        predict(sampleBuffer: sampleBuffer)
+    }
 
   func predict(sampleBuffer: CMSampleBuffer) {
     if currentBuffer == nil, let pixelBuffer = CMSampleBufferGetImageBuffer(sampleBuffer) {
@@ -358,20 +451,17 @@ class ViewController: UIViewController {
         imageOrientation = .up
       }
 
-      // Invoke a VNRequestHandler with that image
-      let handler = VNImageRequestHandler(
-        cvPixelBuffer: pixelBuffer, orientation: imageOrientation, options: [:])
-      if UIDevice.current.orientation != .faceUp {  // stop if placed down on a table
-        t0 = CACurrentMediaTime()  // inference start
-        do {
-          try handler.perform([visionRequest])
-        } catch {
-          print(error)
-        }
-        t1 = CACurrentMediaTime() - t0  // inference dt
-      }
+        // Orientation handling and invoking VNRequestHandler
+        let handler = VNImageRequestHandler(cvPixelBuffer: pixelBuffer, orientation: .up, options: [:])
+        DispatchQueue.global(qos: .userInitiated).async {
+            do {
+                try handler.perform([self.visionRequest])
+            } catch {
+                print("Error performing vision request: \(error)")
+            }
 
-      currentBuffer = nil
+            self.currentBuffer = nil
+        }
     }
   }
 
@@ -624,61 +714,49 @@ class ViewController: UIViewController {
   }  // Pinch to Zoom End --------------------------------------------------------------------------------------------
 }  // ViewController class End
 
-extension ViewController: VideoCaptureDelegate {
-  func videoCapture(_ capture: VideoCapture, didCaptureVideoFrame sampleBuffer: CMSampleBuffer) {
-    predict(sampleBuffer: sampleBuffer)
-  }
+extension ViewController: AVCapturePhotoCaptureDelegate {
+    func photoOutput(_ output: AVCapturePhotoOutput, didFinishProcessingPhoto photo: AVCapturePhoto, error: Error?) {
+        guard let photoData = photo.fileDataRepresentation() else { return }
+
+        let image = UIImage(data: photoData)
+        
+        // Save the photo asynchronously
+        DispatchQueue.global(qos: .userInitiated).async {
+            self.saveImageToLibrary(image: image)
+        }
+    }
+
+    func saveImageToLibrary(image: UIImage?) {
+        guard let image = image else { return }
+
+        // Save the image to the photo library
+        PHPhotoLibrary.requestAuthorization { status in
+            if status == .authorized {
+                UIImageWriteToSavedPhotosAlbum(image, nil, nil, nil)
+            } else {
+                print("Photo library access denied.")
+            }
+        }
+    }
+
+    func requestPhotoLibraryAccess(completion: @escaping (Bool) -> Void) {
+        let status = PHPhotoLibrary.authorizationStatus()
+        if status == .authorized {
+            completion(true)
+        } else if status == .notDetermined {
+            PHPhotoLibrary.requestAuthorization { status in
+                completion(status == .authorized)
+            }
+        } else {
+            completion(false)
+        }
+    }
 }
 
-// Programmatically save image
-extension ViewController: AVCapturePhotoCaptureDelegate {
-  func photoOutput(
-    _ output: AVCapturePhotoOutput, didFinishProcessingPhoto photo: AVCapturePhoto, error: Error?
-  ) {
-    if let error = error {
-      print("error occurred : \(error.localizedDescription)")
-    }
-    if let dataImage = photo.fileDataRepresentation() {
-      let dataProvider = CGDataProvider(data: dataImage as CFData)
-      let cgImageRef: CGImage! = CGImage(
-        jpegDataProviderSource: dataProvider!, decode: nil, shouldInterpolate: true,
-        intent: .defaultIntent)
-      var orientation = CGImagePropertyOrientation.right
-      switch UIDevice.current.orientation {
-      case .landscapeLeft:
-        orientation = .up
-      case .landscapeRight:
-        orientation = .down
-      default:
-        break
-      }
-      var image = UIImage(cgImage: cgImageRef, scale: 0.5, orientation: .right)
-      if let orientedCIImage = CIImage(image: image)?.oriented(orientation),
-        let cgImage = CIContext().createCGImage(orientedCIImage, from: orientedCIImage.extent)
-      {
-        image = UIImage(cgImage: cgImage)
-      }
-      let imageView = UIImageView(image: image)
-      imageView.contentMode = .scaleAspectFill
-      imageView.frame = videoPreview.frame
-      let imageLayer = imageView.layer
-      videoPreview.layer.insertSublayer(imageLayer, above: videoCapture.previewLayer)
 
-      let bounds = UIScreen.main.bounds
-      UIGraphicsBeginImageContextWithOptions(bounds.size, true, 0.0)
-      self.View0.drawHierarchy(in: bounds, afterScreenUpdates: true)
-      let img = UIGraphicsGetImageFromCurrentImageContext()
-      UIGraphicsEndImageContext()
-      imageLayer.removeFromSuperlayer()
-      let activityViewController = UIActivityViewController(
-        activityItems: [img!], applicationActivities: nil)
-      activityViewController.popoverPresentationController?.sourceView = self.View0
-      self.present(activityViewController, animated: true, completion: nil)
-      //
-      //            // Save to camera roll
-      //            UIImageWriteToSavedPhotosAlbum(img!, nil, nil, nil);
-    } else {
-      print("AVCapturePhotoCaptureDelegate Error")
+extension ViewController {
+    func videoCapture(_ capture: VideoCapture, didCaptureVideoFrame sampleBuffer: CMSampleBuffer) {
+        // Your code for handling video frame capture
+        predict(sampleBuffer: sampleBuffer)
     }
-  }
 }

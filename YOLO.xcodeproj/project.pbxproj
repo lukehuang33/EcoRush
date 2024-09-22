@@ -17,12 +17,14 @@
 		63CF37202514455300E2DEA1 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6323C44F22186177008AE681 /* Main.storyboard */; };
 		63CF37212514455300E2DEA1 /* ultralytics_yolo_logotype.png in Resources */ = {isa = PBXBuildFile; fileRef = 6323C45122186177008AE681 /* ultralytics_yolo_logotype.png */; };
 		8EDAA33950796844333D60A7 /* BoundingBoxView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EDAA633C1F2B50286D16008 /* BoundingBoxView.swift */; };
+		951ECAEC2C9FCFF100FE9FF3 /* wasteV5.mlpackage in Sources */ = {isa = PBXBuildFile; fileRef = 951ECAEB2C9FCFF100FE9FF3 /* wasteV5.mlpackage */; };
+		951ECAF02C9FD10A00FE9FF3 /* ChallengeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 951ECAEF2C9FD10A00FE9FF3 /* ChallengeViewController.swift */; };
+		951ECAF22C9FD2B700FE9FF3 /* Challenges.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 951ECAF12C9FD2B700FE9FF3 /* Challenges.storyboard */; };
 		95A310B32C9F887A0041BE54 /* Leaderboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 95A310B22C9F887A0041BE54 /* Leaderboard.storyboard */; };
 		95CC70A82C9F7A1500AE8515 /* LeaderboardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95CC70A72C9F7A1300AE8515 /* LeaderboardViewController.swift */; };
 		95CC70AA2C9F7F9D00AE8515 /* IMG_8780.JPEG in Resources */ = {isa = PBXBuildFile; fileRef = 95CC70A92C9F7F9D00AE8515 /* IMG_8780.JPEG */; };
 		95CC70AC2C9F7FA400AE8515 /* IMG_9676.JPEG in Resources */ = {isa = PBXBuildFile; fileRef = 95CC70AB2C9F7FA400AE8515 /* IMG_9676.JPEG */; };
 		C81DA1042C9FBA5D0081676F /* Map.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C81DA1032C9FBA5D0081676F /* Map.storyboard */; };
-		C830CDD82C9FB28800EA1D0C /* wasteV4.mlpackage in Sources */ = {isa = PBXBuildFile; fileRef = C830CDD72C9FB28800EA1D0C /* wasteV4.mlpackage */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -40,12 +42,14 @@
 		7BCB411721C3096100BFC4D0 /* YOLO.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = YOLO.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8EDAA633C1F2B50286D16008 /* BoundingBoxView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BoundingBoxView.swift; sourceTree = "<group>"; };
 		8EDAAA4507D2D23D7FAB827F /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
+		951ECAEB2C9FCFF100FE9FF3 /* wasteV5.mlpackage */ = {isa = PBXFileReference; lastKnownFileType = folder.mlpackage; path = wasteV5.mlpackage; sourceTree = "<group>"; };
+		951ECAEF2C9FD10A00FE9FF3 /* ChallengeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChallengeViewController.swift; sourceTree = "<group>"; };
+		951ECAF12C9FD2B700FE9FF3 /* Challenges.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Challenges.storyboard; sourceTree = "<group>"; };
 		95A310B22C9F887A0041BE54 /* Leaderboard.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Leaderboard.storyboard; sourceTree = "<group>"; };
 		95CC70A72C9F7A1300AE8515 /* LeaderboardViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LeaderboardViewController.swift; sourceTree = "<group>"; };
 		95CC70A92C9F7F9D00AE8515 /* IMG_8780.JPEG */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = IMG_8780.JPEG; sourceTree = "<group>"; };
 		95CC70AB2C9F7FA400AE8515 /* IMG_9676.JPEG */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = IMG_9676.JPEG; sourceTree = "<group>"; };
 		C81DA1032C9FBA5D0081676F /* Map.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Map.storyboard; sourceTree = "<group>"; };
-		C830CDD72C9FB28800EA1D0C /* wasteV4.mlpackage */ = {isa = PBXFileReference; lastKnownFileType = folder.mlpackage; path = wasteV4.mlpackage; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -74,9 +78,11 @@
 				63A946D8271800E20001C3ED /* Models */,
 				636166E72514438D0054FA7E /* Utilities */,
 				636EFCA721E62DD300DE43BC /* AppDelegate.swift */,
+				951ECAEF2C9FD10A00FE9FF3 /* ChallengeViewController.swift */,
 				636EFC9C21E62DD300DE43BC /* ViewController.swift */,
 				95CC70A72C9F7A1300AE8515 /* LeaderboardViewController.swift */,
 				636EFCA221E62DD300DE43BC /* VideoCapture.swift */,
+				951ECAF12C9FD2B700FE9FF3 /* Challenges.storyboard */,
 				6323C44D22186177008AE681 /* LaunchScreen.storyboard */,
 				95A310B22C9F887A0041BE54 /* Leaderboard.storyboard */,
 				6323C44F22186177008AE681 /* Main.storyboard */,
@@ -94,7 +100,7 @@
 		63A946D8271800E20001C3ED /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				C830CDD72C9FB28800EA1D0C /* wasteV4.mlpackage */,
+				951ECAEB2C9FCFF100FE9FF3 /* wasteV5.mlpackage */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -181,6 +187,7 @@
 				63CF37202514455300E2DEA1 /* Main.storyboard in Resources */,
 				95A310B32C9F887A0041BE54 /* Leaderboard.storyboard in Resources */,
 				C81DA1042C9FBA5D0081676F /* Map.storyboard in Resources */,
+				951ECAF22C9FD2B700FE9FF3 /* Challenges.storyboard in Resources */,
 				63CF37212514455300E2DEA1 /* ultralytics_yolo_logotype.png in Resources */,
 				63CF371F2514455300E2DEA1 /* LaunchScreen.storyboard in Resources */,
 				95CC70AA2C9F7F9D00AE8515 /* IMG_8780.JPEG in Resources */,
@@ -219,7 +226,8 @@
 			files = (
 				95CC70A82C9F7A1500AE8515 /* LeaderboardViewController.swift in Sources */,
 				636EFCAF21E62DD300DE43BC /* VideoCapture.swift in Sources */,
-				C830CDD82C9FB28800EA1D0C /* wasteV4.mlpackage in Sources */,
+				951ECAF02C9FD10A00FE9FF3 /* ChallengeViewController.swift in Sources */,
+				951ECAEC2C9FCFF100FE9FF3 /* wasteV5.mlpackage in Sources */,
 				636166EA251443B20054FA7E /* ThresholdProvider.swift in Sources */,
 				636EFCB321E62DD300DE43BC /* AppDelegate.swift in Sources */,
 				636EFCAA21E62DD300DE43BC /* ViewController.swift in Sources */,
@@ -355,7 +363,7 @@
 				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = NO;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 0;
-				DEVELOPMENT_TEAM = DXWSADPRRV;
+				DEVELOPMENT_TEAM = 9SJM2G7UAD;
 				INFOPLIST_FILE = YOLO/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = "Ultralytics YOLO";
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.developer-tools";
@@ -365,7 +373,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 8.2.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.cadenli.pennapps;
+				PRODUCT_BUNDLE_IDENTIFIER = com.lukehuang.pennapps;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
 				SUPPORTS_MACCATALYST = NO;
@@ -383,7 +391,7 @@
 				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = NO;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 0;
-				DEVELOPMENT_TEAM = DXWSADPRRV;
+				DEVELOPMENT_TEAM = 9SJM2G7UAD;
 				INFOPLIST_FILE = YOLO/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = "Ultralytics YOLO";
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.developer-tools";
@@ -393,7 +401,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 8.2.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.cadenli.pennapps;
+				PRODUCT_BUNDLE_IDENTIFIER = com.lukehuang.pennapps;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
 				SUPPORTS_MACCATALYST = NO;
