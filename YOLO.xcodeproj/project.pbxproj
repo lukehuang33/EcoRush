@@ -18,10 +18,11 @@
 		63CF37212514455300E2DEA1 /* ultralytics_yolo_logotype.png in Resources */ = {isa = PBXBuildFile; fileRef = 6323C45122186177008AE681 /* ultralytics_yolo_logotype.png */; };
 		8EDAA33950796844333D60A7 /* BoundingBoxView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EDAA633C1F2B50286D16008 /* BoundingBoxView.swift */; };
 		95A310B32C9F887A0041BE54 /* Leaderboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 95A310B22C9F887A0041BE54 /* Leaderboard.storyboard */; };
-		95CC70A32C9F735500AE8515 /* wasteV3.mlpackage in Sources */ = {isa = PBXBuildFile; fileRef = 95CC70A22C9F735500AE8515 /* wasteV3.mlpackage */; };
 		95CC70A82C9F7A1500AE8515 /* LeaderboardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95CC70A72C9F7A1300AE8515 /* LeaderboardViewController.swift */; };
 		95CC70AA2C9F7F9D00AE8515 /* IMG_8780.JPEG in Resources */ = {isa = PBXBuildFile; fileRef = 95CC70A92C9F7F9D00AE8515 /* IMG_8780.JPEG */; };
 		95CC70AC2C9F7FA400AE8515 /* IMG_9676.JPEG in Resources */ = {isa = PBXBuildFile; fileRef = 95CC70AB2C9F7FA400AE8515 /* IMG_9676.JPEG */; };
+		C81DA1042C9FBA5D0081676F /* Map.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C81DA1032C9FBA5D0081676F /* Map.storyboard */; };
+		C830CDD82C9FB28800EA1D0C /* wasteV4.mlpackage in Sources */ = {isa = PBXBuildFile; fileRef = C830CDD72C9FB28800EA1D0C /* wasteV4.mlpackage */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -40,10 +41,11 @@
 		8EDAA633C1F2B50286D16008 /* BoundingBoxView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BoundingBoxView.swift; sourceTree = "<group>"; };
 		8EDAAA4507D2D23D7FAB827F /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		95A310B22C9F887A0041BE54 /* Leaderboard.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Leaderboard.storyboard; sourceTree = "<group>"; };
-		95CC70A22C9F735500AE8515 /* wasteV3.mlpackage */ = {isa = PBXFileReference; lastKnownFileType = folder.mlpackage; path = wasteV3.mlpackage; sourceTree = "<group>"; };
 		95CC70A72C9F7A1300AE8515 /* LeaderboardViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LeaderboardViewController.swift; sourceTree = "<group>"; };
 		95CC70A92C9F7F9D00AE8515 /* IMG_8780.JPEG */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = IMG_8780.JPEG; sourceTree = "<group>"; };
 		95CC70AB2C9F7FA400AE8515 /* IMG_9676.JPEG */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = IMG_9676.JPEG; sourceTree = "<group>"; };
+		C81DA1032C9FBA5D0081676F /* Map.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Map.storyboard; sourceTree = "<group>"; };
+		C830CDD72C9FB28800EA1D0C /* wasteV4.mlpackage */ = {isa = PBXFileReference; lastKnownFileType = folder.mlpackage; path = wasteV4.mlpackage; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -78,6 +80,7 @@
 				6323C44D22186177008AE681 /* LaunchScreen.storyboard */,
 				95A310B22C9F887A0041BE54 /* Leaderboard.storyboard */,
 				6323C44F22186177008AE681 /* Main.storyboard */,
+				C81DA1032C9FBA5D0081676F /* Map.storyboard */,
 				633BC6FA22EDE73D00821BCA /* Settings.bundle */,
 				632892DF22EB3DB100A12D9C /* Info.plist */,
 				636EFCB821E62E3900DE43BC /* Assets.xcassets */,
@@ -91,7 +94,7 @@
 		63A946D8271800E20001C3ED /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				95CC70A22C9F735500AE8515 /* wasteV3.mlpackage */,
+				C830CDD72C9FB28800EA1D0C /* wasteV4.mlpackage */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -177,6 +180,7 @@
 				636EFCB921E62E3900DE43BC /* Assets.xcassets in Resources */,
 				63CF37202514455300E2DEA1 /* Main.storyboard in Resources */,
 				95A310B32C9F887A0041BE54 /* Leaderboard.storyboard in Resources */,
+				C81DA1042C9FBA5D0081676F /* Map.storyboard in Resources */,
 				63CF37212514455300E2DEA1 /* ultralytics_yolo_logotype.png in Resources */,
 				63CF371F2514455300E2DEA1 /* LaunchScreen.storyboard in Resources */,
 				95CC70AA2C9F7F9D00AE8515 /* IMG_8780.JPEG in Resources */,
@@ -215,7 +219,7 @@
 			files = (
 				95CC70A82C9F7A1500AE8515 /* LeaderboardViewController.swift in Sources */,
 				636EFCAF21E62DD300DE43BC /* VideoCapture.swift in Sources */,
-				95CC70A32C9F735500AE8515 /* wasteV3.mlpackage in Sources */,
+				C830CDD82C9FB28800EA1D0C /* wasteV4.mlpackage in Sources */,
 				636166EA251443B20054FA7E /* ThresholdProvider.swift in Sources */,
 				636EFCB321E62DD300DE43BC /* AppDelegate.swift in Sources */,
 				636EFCAA21E62DD300DE43BC /* ViewController.swift in Sources */,
@@ -351,7 +355,7 @@
 				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = NO;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 0;
-				DEVELOPMENT_TEAM = 9SJM2G7UAD;
+				DEVELOPMENT_TEAM = DXWSADPRRV;
 				INFOPLIST_FILE = YOLO/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = "Ultralytics YOLO";
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.developer-tools";
@@ -361,7 +365,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 8.2.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.pennapps.iDetection;
+				PRODUCT_BUNDLE_IDENTIFIER = com.cadenli.pennapps;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
 				SUPPORTS_MACCATALYST = NO;
@@ -379,7 +383,7 @@
 				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = NO;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 0;
-				DEVELOPMENT_TEAM = 9SJM2G7UAD;
+				DEVELOPMENT_TEAM = DXWSADPRRV;
 				INFOPLIST_FILE = YOLO/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = "Ultralytics YOLO";
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.developer-tools";
@@ -389,7 +393,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 8.2.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.pennapps.iDetection;
+				PRODUCT_BUNDLE_IDENTIFIER = com.cadenli.pennapps;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
 				SUPPORTS_MACCATALYST = NO;

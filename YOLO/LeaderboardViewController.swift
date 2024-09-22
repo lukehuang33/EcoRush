@@ -12,9 +12,9 @@ class LeaderboardViewController: UIViewController, UITableViewDelegate, UITableV
     @IBOutlet weak var tableView: UITableView!
 
     let leaderboardData = [
-            "1. User1 - 1000 points",
-            "2. User2 - 950 points",
-            "3. User3 - 900 points"
+            "1. Caden (you) - 1000 points",
+            "2. Luke - 950 points",
+            "3. Aiden - 700 points"
         ]
     override func viewDidLoad() {
         super.viewDidLoad()

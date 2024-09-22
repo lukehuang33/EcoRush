@@ -1,0 +1,17 @@
+{
+  "MLModelVersionStringKey" : "8.2.98",
+  "MLModelDescriptionKey" : "Ultralytics last model trained on \/content\/datasets\/Combined-V1-3\/data.yaml",
+  "MLModelCreatorDefinedKey" : {
+    "stride" : "32",
+    "Confidence threshold" : "0.25",
+    "IoU threshold" : "0.45",
+    "docs" : "https:\/\/docs.ultralytics.com",
+    "task" : "detect",
+    "imgsz" : "[640, 640]",
+    "date" : "2024-09-21T21:00:54.682766",
+    "batch" : "1",
+    "names" : "{0: 'aluminum can', 1: 'plastic bottle', 2: 'recycle bin', 3: 'trash bin'}"
+  },
+  "MLModelAuthorKey" : "Ultralytics",
+  "MLModelLicenseKey" : "AGPL-3.0 License (https:\/\/ultralytics.com\/license)"
+}

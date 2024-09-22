@@ -17,7 +17,7 @@ import CoreMedia
 import UIKit
 import Vision
 
-var mlModel = try! wasteV3(configuration: .init()).model
+var mlModel = try! wasteV4(configuration: .init()).model
 
 class ViewController: UIViewController {
   @IBOutlet var videoPreview: UIView!
@@ -161,20 +161,8 @@ class ViewController: UIViewController {
     /// Switch model
     switch segmentedControl.selectedSegmentIndex {
     case 0:
-      self.labelName.text = "wasteV3"
-      mlModel = try! wasteV3(configuration: .init()).model
-    case 1:
-      self.labelName.text = "wasteV3"
-      mlModel = try! wasteV3(configuration: .init()).model
-    case 2:
-      self.labelName.text = "wasteV3"
-      mlModel = try! wasteV3(configuration: .init()).model
-    case 3:
-      self.labelName.text = "wasteV3"
-      mlModel = try! wasteV3(configuration: .init()).model
-    case 4:
-      self.labelName.text = "wasteV3"
-      mlModel = try! wasteV3(configuration: .init()).model
+      self.labelName.text = "wasteV4"
+      mlModel = try! wasteV4(configuration: .init()).model
     default:
       break
     }
@@ -243,8 +231,7 @@ class ViewController: UIViewController {
   }
 
   func setLabels() {
-    self.labelName.text = "wasteV3"
-    self.labelVersion.text = "Version " + UserDefaults.standard.string(forKey: "app_version")!
+    self.labelName.text = "wasteV4"
   }
 
   @IBAction func playButton(_ sender: Any) {
